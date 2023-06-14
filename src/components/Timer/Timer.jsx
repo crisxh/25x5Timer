@@ -9,6 +9,8 @@ function Timer({ type, minutes, id }) {
     const [secIntervalId, setSecIntervalid] = useState(false)
     const [userTime, setUserTime] = useState(0);
 
+    let secTime = seconds;
+
     function handleIncrement() {
         console.log(min)
 
@@ -44,11 +46,11 @@ function Timer({ type, minutes, id }) {
 
     const countdown = () => {
 
-        if (seconds > 0) {
+        if (secTime > 0) {
             setSeconds(prev => prev - 1);
             console.log('seconds ', seconds)
         }
-        if (seconds == 0) {
+        if (secTime == 0) {
             setMin(prev => prev - 1)
 
 
