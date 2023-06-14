@@ -1,26 +1,37 @@
 import { useState } from 'react'
-import './TimerType.css'
+import './Timer.css'
 
-function TimerType({ type, minutes, id }) {
-    const [time, setTime] = useState(minutes)
-    const [timer, setTimer] = useState(minutes);
+function Timer({ type, minutes, id }) {
+    const [min, setMin] = useState(minutes)
+    const [seconds, setSeconds] = useState(5)
+    const [timer, setTimer] = useState(min);
     const [intervalId, setIntervalId] = useState(false);
-    //const [userTime, setUserTime] = useState(0);
+    const [secIntervalId, setSecIntervalid] = useState(false)
+    const [userTime, setUserTime] = useState(0);
 
     function handleIncrement() {
-        console.log(time)
-        setTime(prev => prev + 1)
+        console.log(min)
+
+        setMin(prev => prev + 1)
+        //  setTimer(min)
+
+        console.log(timer)
 
     }
 
     function handleDecrement() {
-        console.log(time)
-        setTime(prev => prev - 1)
+        console.log(min)
+
+        setMin(prev => prev - 1)
+        // setTimer(min)
+
+
+        console.log(timer)
     }
 
 
 
-    //helper function to convert time
+    //helper function to convert min
     const secondsToMinutes = (seconds) => {
         let minutes = seconds / 60;
         let timerSeconds = seconds % 60
@@ -33,12 +44,13 @@ function TimerType({ type, minutes, id }) {
 
     const countdown = () => {
 
-        if (time > 0) {
-            setTimer(prev => prev - 1);
+        if (seconds > 0) {
+            setSeconds(prev => prev - 1);
+            console.log('seconds ', seconds)
+        }
+        if (seconds == 0) {
+            setMin(prev => prev - 1)
 
-            if (time === 0) {
-                stopCountDown()
-            }
 
         }
 
@@ -76,17 +88,17 @@ function TimerType({ type, minutes, id }) {
 
     }
     const restartCountDown = () => {
-        setTimer(userTime);
+        setSeconds(5);
         setIntervalId(false);
         clearInterval(intervalId);
     }
 
     return (
         <div id={id}>
-            {type} {time}
+            {type} {min}
             <button onClick={handleIncrement}>increment</button>
             <button onClick={handleDecrement}>decrement</button>
-            timer: {timer}
+
 
             <div id='Countdown' >
                 <div id="break-label">
@@ -95,7 +107,7 @@ function TimerType({ type, minutes, id }) {
                 <div id="sesson-label">
                     <h3>session length</h3>
                 </div>
-                <div id='timer'> {timer} </div>
+                <div id='timer'> timer: {min}:{seconds}</div>
                 <div id='buttons'>
                     <button className='timerButton' id="" onClick={startCountDown}>
                         Start
@@ -116,4 +128,4 @@ function TimerType({ type, minutes, id }) {
 
 
 }
-export default TimerType;
+export default Timer;
