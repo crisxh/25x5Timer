@@ -1,7 +1,11 @@
-#session,#id{
+#session-timer{
     border:2px solid pink;
 }
 
-#rest,#id2{
+#break-timer{
     border:2px solid green;
+}
+
+.timer{
+    margin:20px;
 }

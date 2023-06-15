@@ -119,7 +119,7 @@ function Timer({ type, minutes, id }) {
     }
 
     return (
-        <div id={id}>
+        <div id={`${type}-timer`} className='timer'>
             <div id={`${type}-length`}>{min}</div>
             <button id={`${type}-decrement`} onClick={handleIncrement}>increment</button>
             <button id={`${type}-increment`} onClick={handleDecrement}>decrement</button>
