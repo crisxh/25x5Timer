@@ -23,6 +23,7 @@ function Timer({ type, minutes, id }) {
 
     function handleDecrement() {
         console.log(min)
+        console.log(type)
 
         setMin(prev => prev - 1)
         // setTimer(min)
@@ -65,6 +66,28 @@ function Timer({ type, minutes, id }) {
 
     }
 
+    const startStopCountDown = () => {
+        if (!intervalId) {
+
+
+            setIntervalId(setInterval(countdown, 1000));
+        }
+
+
+        console.log(intervalId)
+
+        if (intervalId) {
+            console.log(intervalId)
+            console.log(secondsToMinutes(1430))
+            clearInterval(intervalId);
+            setIntervalId(false);
+
+        }
+
+
+
+    }
+
     const startCountDown = () => {
 
 
@@ -97,13 +120,13 @@ function Timer({ type, minutes, id }) {
 
     return (
         <div id={id}>
-            {type} {min}
-            <button onClick={handleIncrement}>increment</button>
-            <button onClick={handleDecrement}>decrement</button>
+            <div id={`${type}-length`}>{min}</div>
+            <button id={`${type}-decrement`} onClick={handleIncrement}>increment</button>
+            <button id={`${type}-increment`} onClick={handleDecrement}>decrement</button>
 
 
             <div id='Countdown' >
-                <div id="break-label">
+                <div id={`${type}-label`}>
                     <h3>break length</h3>
                 </div>
                 <div id="sesson-label">
@@ -111,10 +134,10 @@ function Timer({ type, minutes, id }) {
                 </div>
                 <div id='timer'> timer: {min}:{seconds}</div>
                 <div id='buttons'>
-                    <button className='timerButton' id="" onClick={startCountDown}>
+                    <button className='timerButton' id="" onClick={startStopCountDown}>
                         Start
                     </button>
-                    <button className='timerButton' onClick={stopCountDown}>Stop</button>
+                    {/* <button className='timerButton' onClick={stopCountDown}>Stop</button> */}
                     <button className='timerButton' onClick={restartCountDown}>
                         Restart
                     </button>
@@ -124,10 +147,10 @@ function Timer({ type, minutes, id }) {
                     <button onClick={handleUserTimeButton}>Set Time</button>
                 </div> */}
             </div>
+
         </div>
 
     )
-
-
 }
+
 export default Timer;
