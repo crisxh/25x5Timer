@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <div id="app">
-        <Timer minutes={5} type='break' />
+        <Timer minutes={1} type='break' />
         <Timer minutes={25} type='session' />
       </div>
     </>

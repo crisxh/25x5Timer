@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Timer.css'
 
 function Timer({ type, minutes, id }) {
@@ -9,7 +9,30 @@ function Timer({ type, minutes, id }) {
     const [secIntervalId, setSecIntervalid] = useState(false)
     const [userTime, setUserTime] = useState(0);
 
-    let secTime = seconds;
+    useEffect(() => {
+
+        if (intervalId && seconds > 0) {
+            setTimeout(() => {
+                setSeconds(prev => prev - 1);
+                console.log('seconds ', seconds)
+
+            }, 1000)
+
+        }
+        if (seconds == 0) {
+            setMin(prev => prev - 1)
+            setSeconds(seconds)
+
+
+        }
+        if (minutes == 0 && seconds == 0) {
+            clearInterval(intervalId);
+            setIntervalId(false);
+        }
+
+    }, [seconds, intervalId, minutes])
+
+
 
     function handleIncrement() {
         console.log(min)
