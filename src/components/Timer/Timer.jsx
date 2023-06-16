@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './Timer.css'
 
 function Timer({ type }) {
-    const [userTime, setUserTime] = useState(2);
+    const [userTime, setUserTime] = useState(type === 'session' ? 25 : type === 'break' ? 5 : 0);
     const [min, setMin] = useState(userTime - 1)
     const [seconds, setSeconds] = useState(59)
     //const [timer, setTimer] = useState(min);
@@ -164,13 +164,13 @@ function Timer({ type }) {
                 <div id="sesson-label">
                     <h3>session length</h3>
                 </div>
-                <div id='timer'> timer: {min}:{seconds}</div>
+                <div id='time-left'> timer: {min}:{seconds}</div>
                 <div id='buttons'>
-                    <button className='timerButton' id="" onClick={startStopCountDown}>
+                    <button className='timerButton' id="start_stop" onClick={startStopCountDown}>
                         Start
                     </button>
                     {/* <button className='timerButton' onClick={stopCountDown}>Stop</button> */}
-                    <button className='timerButton' onClick={restartCountDown}>
+                    <button className='timerButton' id="reset" onClick={restartCountDown}>
                         Restart
                     </button>
                 </div>
