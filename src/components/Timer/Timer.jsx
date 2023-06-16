@@ -1,43 +1,51 @@
 import { useState, useEffect } from 'react'
 import './Timer.css'
 
-function Timer({ type, minutes, id }) {
-    const [min, setMin] = useState(minutes)
-    const [seconds, setSeconds] = useState(5)
-    const [timer, setTimer] = useState(min);
+function Timer({ type }) {
+    const [userTime, setUserTime] = useState(5);
+    const [min, setMin] = useState(userTime)
+    const [seconds, setSeconds] = useState(1)
+    //const [timer, setTimer] = useState(min);
     const [intervalId, setIntervalId] = useState(false);
-    const [secIntervalId, setSecIntervalid] = useState(false)
-    const [userTime, setUserTime] = useState(0);
+
+
 
     useEffect(() => {
+
+
+
 
         if (intervalId && seconds > 0) {
             setTimeout(() => {
                 setSeconds(prev => prev - 1);
                 console.log('seconds ', seconds)
 
+
             }, 1000)
 
         }
-        if (seconds == 0) {
-            setMin(prev => prev - 1)
-            setSeconds(seconds)
+        // if (seconds === 0) {
+        //     setMin(prev => prev - 1)
+        //     setSeconds(5)
+
+        // }
+
+        // if (min === 0 && seconds === 0) {
+        //     setIntervalId(false)
+
+        // }
 
 
-        }
-        if (minutes == 0 && seconds == 0) {
-            clearInterval(intervalId);
-            setIntervalId(false);
-        }
 
-    }, [seconds, intervalId, minutes])
+    }, [seconds, intervalId, min])
 
 
 
     function handleIncrement() {
         console.log(min)
 
-        setMin(prev => prev + 1)
+        setUserTime(prev => prev + 1)
+        restartCountDown()
         //  setTimer(min)
 
         console.log(timer)
@@ -48,7 +56,8 @@ function Timer({ type, minutes, id }) {
         console.log(min)
         console.log(type)
 
-        setMin(prev => prev - 1)
+        setUserTime(prev => prev - 1)
+        restartCountDown()
         // setTimer(min)
 
 
@@ -70,11 +79,11 @@ function Timer({ type, minutes, id }) {
 
     const countdown = () => {
 
-        if (secTime > 0) {
+        if (seconds > 0) {
             setSeconds(prev => prev - 1);
             console.log('seconds ', seconds)
         }
-        if (secTime == 0) {
+        if (seconds === 0) {
             setMin(prev => prev - 1)
 
 
@@ -93,7 +102,7 @@ function Timer({ type, minutes, id }) {
         if (!intervalId) {
 
 
-            setIntervalId(setInterval(countdown, 1000));
+            setIntervalId(true);
         }
 
 
@@ -111,39 +120,40 @@ function Timer({ type, minutes, id }) {
 
     }
 
-    const startCountDown = () => {
+    // const startCountDown = () => {
 
 
-        if (!intervalId) {
+    //     if (!intervalId) {
 
 
-            setIntervalId(setInterval(countdown, 1000));
-        }
+    //         setIntervalId(setInterval(countdown, 1000));
+    //     }
 
 
-        console.log(intervalId)
-    }
-    const stopCountDown = () => {
-        if (intervalId) {
-            console.log(intervalId)
-            console.log(secondsToMinutes(1430))
+    //     console.log(intervalId)
+    // }
+    // const stopCountDown = () => {
+    //     if (intervalId) {
+    //         console.log(intervalId)
+    //         console.log(secondsToMinutes(1430))
 
-        }
+    //     }
 
-        clearInterval(intervalId);
-        setIntervalId(false);
+    //     clearInterval(intervalId);
+    //     setIntervalId(false);
 
 
-    }
+    // }
     const restartCountDown = () => {
         setSeconds(5);
+        setMin(userTime);
         setIntervalId(false);
         clearInterval(intervalId);
     }
 
     return (
         <div id={`${type}-timer`} className='timer'>
-            <div id={`${type}-length`}>{min}</div>
+            <div id={`${type}-length`}>{userTime}</div>
             <button id={`${type}-decrement`} onClick={handleIncrement}>increment</button>
             <button id={`${type}-increment`} onClick={handleDecrement}>decrement</button>
 
