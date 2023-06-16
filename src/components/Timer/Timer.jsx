@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './Timer.css'
 
 function Timer({ type }) {
     const [userTime, setUserTime] = useState(2);
-    const [min, setMin] = useState(userTime)
-    const [seconds, setSeconds] = useState(1)
+    const [min, setMin] = useState(userTime - 1)
+    const [seconds, setSeconds] = useState(59)
     //const [timer, setTimer] = useState(min);
     const [intervalId, setIntervalId] = useState(false);
-
+    const sec = useRef(59)
 
 
     useEffect(() => {
@@ -27,7 +27,7 @@ function Timer({ type }) {
         if (seconds === 0 && min != 0) {
             setMin(prev => prev - 1)
             if (min >= 0) {
-                setSeconds(5)
+                setSeconds(sec.current)
 
             }
 
@@ -64,24 +64,11 @@ function Timer({ type }) {
 
         setUserTime(prev => prev - 1)
         restartCountDown()
-        // setTimer(min)
 
-
-        console.log(timer)
     }
 
 
 
-    //helper function to convert min
-    const secondsToMinutes = (seconds) => {
-        let minutes = seconds / 60;
-        let timerSeconds = seconds % 60
-        return parseInt(minutes) + ":" + timerSeconds;
-    }
-    const minutesToSeconds = (minutes) => {
-        let seconds = minutes * 60;
-        return seconds;
-    }
 
     const countdown = () => {
 
@@ -122,8 +109,7 @@ function Timer({ type }) {
         console.log(intervalId)
 
         if (intervalId) {
-            console.log(intervalId)
-            console.log(secondsToMinutes(1430))
+
             clearInterval(intervalId);
             setIntervalId(false);
 
@@ -158,7 +144,7 @@ function Timer({ type }) {
 
     // }
     const restartCountDown = () => {
-        setSeconds(5);
+        setSeconds(sec.current);
         setMin(userTime);
         setIntervalId(false);
         clearInterval(intervalId);
