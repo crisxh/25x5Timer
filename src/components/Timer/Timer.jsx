@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './Timer.css'
 
 function Timer({ type }) {
-    const [userTime, setUserTime] = useState(5);
+    const [userTime, setUserTime] = useState(2);
     const [min, setMin] = useState(userTime)
     const [seconds, setSeconds] = useState(1)
     //const [timer, setTimer] = useState(min);
@@ -16,24 +16,30 @@ function Timer({ type }) {
 
 
         if (intervalId && seconds > 0) {
-            setTimeout(() => {
-                setSeconds(prev => prev - 1);
-                console.log('seconds ', seconds)
+            // setTimeout(() => {
+            //     setSeconds(prev => prev - 1);
+            //     console.log('seconds ', seconds)
 
 
-            }, 1000)
+            // }, 1000)
 
         }
-        // if (seconds === 0) {
-        //     setMin(prev => prev - 1)
-        //     setSeconds(5)
+        if (seconds === 0 && min != 0) {
+            setMin(prev => prev - 1)
+            if (min >= 0) {
+                setSeconds(5)
 
-        // }
+            }
 
-        // if (min === 0 && seconds === 0) {
-        //     setIntervalId(false)
 
-        // }
+        }
+        if (min === 0 && seconds === 0) {
+            setIntervalId(false)
+            clearInterval(intervalId)
+        }
+
+
+
 
 
 
@@ -79,15 +85,21 @@ function Timer({ type }) {
 
     const countdown = () => {
 
-        if (seconds > 0) {
-            setSeconds(prev => prev - 1);
-            console.log('seconds ', seconds)
-        }
-        if (seconds === 0) {
-            setMin(prev => prev - 1)
+
+        setSeconds(prev => prev - 1);
+        console.log('seconds ', seconds)
 
 
-        }
+
+        // if (seconds > 0) {
+        //     setSeconds(prev => prev - 1);
+        //     console.log('seconds ', seconds)
+        // }
+        // if (seconds === 0) {
+        //     setMin(prev => prev - 1)
+
+
+        // }
 
 
 
@@ -103,6 +115,7 @@ function Timer({ type }) {
 
 
             setIntervalId(true);
+            setIntervalId(setInterval(countdown, 1000))
         }
 
 
