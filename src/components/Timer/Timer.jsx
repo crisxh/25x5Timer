@@ -3,16 +3,20 @@ import './Timer.css'
 
 function Timer({ type }) {
     const [userTime, setUserTime] = useState(type === 'session' ? 25 : type === 'break' ? 5 : 0);
-    const [min, setMin] = useState(userTime - 1)
-    const [seconds, setSeconds] = useState(59)
+    const [min, setMin] = useState(userTime)
+    const [seconds, setSeconds] = useState(60)
     //const [timer, setTimer] = useState(min);
     const [intervalId, setIntervalId] = useState(false);
-    const sec = useRef(59)
+    const sec = useRef(60)
 
 
     useEffect(() => {
 
+        if (seconds === 59 && min === userTime) {
+            setMin(prev => prev - 1)
 
+
+        }
 
 
         if (intervalId && seconds > 0) {
@@ -43,27 +47,46 @@ function Timer({ type }) {
 
 
 
-    }, [seconds, intervalId, min])
+    }, [seconds, intervalId, min, userTime])
+
+    useEffect(() => {
+        restartCountDown()
+
+    }, [userTime])
+
 
 
 
     function handleIncrement() {
         console.log(min)
+        if (userTime < 60) {
+            setUserTime(prev => prev + 1)
 
-        setUserTime(prev => prev + 1)
-        restartCountDown()
-        //  setTimer(min)
+        }
+        else {
+            setUserTime(60)
+        }
 
-        console.log(timer)
+
+
+
 
     }
 
     function handleDecrement() {
-        console.log(min)
-        console.log(type)
+        if (userTime > 0) {
+            setUserTime(prev => prev - 1)
 
-        setUserTime(prev => prev - 1)
-        restartCountDown()
+
+            console.log(min)
+            console.log(type)
+            console.log('usertime', userTime)
+
+        } else {
+            setUserTime(0)
+        }
+
+
 
     }
 
@@ -150,6 +173,24 @@ function Timer({ type }) {
         clearInterval(intervalId);
     }
 
+    const returnMinSec = () => {
+
+
+        if (seconds === 60) {
+            return <div>{min}:{'00'} </div>
+        }
+        if (seconds < 60) {
+
+            return <div>{min}:{seconds} </div>
+        }
+
+
+
+
+
+
+    }
+
     return (
         <div id={`${type}-timer`} className='timer'>
             <div id={`${type}-length`}>{userTime}</div>
@@ -164,7 +205,11 @@ function Timer({ type }) {
                 <div id="sesson-label">
                     <h3>session length</h3>
                 </div>
-                <div id='time-left'> timer: {min}:{seconds}</div>
+                <div id='time-left'> timer:
+
+                    {returnMinSec()}
+
+                </div>
                 <div id='buttons'>
                     <button className='timerButton' id="start_stop" onClick={startStopCountDown}>
                         Start
