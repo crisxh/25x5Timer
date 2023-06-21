@@ -7,10 +7,14 @@ function Timer({ type }) {
     const [seconds, setSeconds] = useState(60)
     //const [timer, setTimer] = useState(min);
     const [intervalId, setIntervalId] = useState(false);
+
+    //initial seconds amount can be lowered to not wait the whole time
     const sec = useRef(60)
 
 
     useEffect(() => {
+
+
 
         if (seconds === 59 && min === userTime) {
             setMin(prev => prev - 1)
@@ -176,22 +180,7 @@ function Timer({ type }) {
     const returnMinSec = () => {
 
 
-        if (seconds === 60) {
-            return <div>{min}:{'00'} </div>
-        }
-        if (seconds < 60) {
 
-            return <div>{min}:{seconds} </div>
-        }
-
-        if (min < 9) {
-
-            return <div>0{min}:{seconds} </div>
-        }
-        if (seconds < 9) {
-
-            return <div>{min}:0{seconds} </div>
-        }
 
 
 
@@ -216,7 +205,11 @@ function Timer({ type }) {
                 </div>
                 <div id='time-left'>
 
-                    {min <= 9 ? "0" + min : min}:{seconds <= 9 ? "0" + seconds : seconds}
+
+
+                    {min <= 9 ? "0" + min : min}:{seconds === 60 ? '00' : seconds <= 9 ? "0" + seconds : seconds}
+
+
 
                 </div>
                 <div id='buttons'>
