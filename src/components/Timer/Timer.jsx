@@ -184,6 +184,15 @@ function Timer({ type }) {
             return <div>{min}:{seconds} </div>
         }
 
+        if (min < 9) {
+
+            return <div>0{min}:{seconds} </div>
+        }
+        if (seconds < 9) {
+
+            return <div>{min}:0{seconds} </div>
+        }
+
 
 
 
@@ -205,9 +214,9 @@ function Timer({ type }) {
                 <div id="sesson-label">
                     <h3>session length</h3>
                 </div>
-                <div id='time-left'> timer:
+                <div id='time-left'>
 
-                    {returnMinSec()}
+                    {min <= 9 ? "0" + min : min}:{seconds <= 9 ? "0" + seconds : seconds}
 
                 </div>
                 <div id='buttons'>
