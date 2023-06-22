@@ -69,7 +69,7 @@ function Timer({ type, userTime }) {
 
 
         setSeconds(prev => prev - 1);
-        console.log('seconds ', seconds)
+
 
 
 
@@ -101,7 +101,7 @@ function Timer({ type, userTime }) {
         }
 
 
-        console.log(intervalId)
+
 
         if (intervalId) {
 
