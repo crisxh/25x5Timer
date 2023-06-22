@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import './Timer.css'
 
-function Timer({ type, userMin }) {
-    const [userTime, setUserTime] = useState(userMin);
+function Timer({ type, userTime }) {
+
     const [min, setMin] = useState(userTime)
     const [seconds, setSeconds] = useState(60)
     //const [timer, setTimer] = useState(min);
@@ -61,38 +61,6 @@ function Timer({ type, userMin }) {
 
 
 
-    function handleIncrement() {
-        console.log(min)
-        if (userTime < 60) {
-            setUserTime(prev => prev + 1)
-
-        }
-        else {
-            setUserTime(60)
-        }
-
-
-
-
-
-    }
-
-    function handleDecrement() {
-        if (userTime > 0) {
-            setUserTime(prev => prev - 1)
-
-
-            console.log(min)
-            console.log(type)
-            console.log('usertime', userTime)
-
-        } else {
-            setUserTime(0)
-        }
-
-
-
-    }
 
 
 
@@ -191,21 +159,14 @@ function Timer({ type, userMin }) {
 
     return (
         <div id={`${type}-timer`} className='timer'>
-            <div id={`${type}-length`}>{userTime}</div>
-            <button id={`${type}-decrement`} onClick={handleIncrement}>increment</button>
-            <button id={`${type}-increment`} onClick={handleDecrement}>decrement</button>
+            <h1>{type}</h1>
+
+
 
 
             <div id='Countdown' >
-                <div id={`${type}-label`}>
 
-                </div>
-                <div id="sesson-label">
-                    <h3>session length</h3>
-                </div>
                 <div id='time-left'>
-
-
 
                     {min <= 9 ? "0" + min : min}:{seconds === 60 ? '00' : seconds <= 9 ? "0" + seconds : seconds}
 
