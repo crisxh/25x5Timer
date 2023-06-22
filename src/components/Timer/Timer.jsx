@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import './Timer.css'
 
-function Timer({ type }) {
-    const [userTime, setUserTime] = useState(type === 'session' ? 25 : type === 'break' ? 5 : 0);
+function Timer({ type, userMin }) {
+    const [userTime, setUserTime] = useState(userMin);
     const [min, setMin] = useState(userTime)
     const [seconds, setSeconds] = useState(60)
     //const [timer, setTimer] = useState(min);
@@ -198,7 +198,7 @@ function Timer({ type }) {
 
             <div id='Countdown' >
                 <div id={`${type}-label`}>
-                    <h3>break length</h3>
+
                 </div>
                 <div id="sesson-label">
                     <h3>session length</h3>
