@@ -7,7 +7,7 @@ function Timer({ type, userTime, handleSession, getRestart }) {
     const [seconds, setSeconds] = useState(60)
     const [timer, setTimer] = useState(true);
     const [intervalId, setIntervalId] = useState(false);
-    const [restarted, setRestarted] = useState(false);
+
 
     //initial seconds amount can be lowered to not wait the whole time
     const sec = useRef(6)
@@ -116,7 +116,7 @@ function Timer({ type, userTime, handleSession, getRestart }) {
         setMin(userTime);
         setIntervalId(false);
         clearInterval(intervalId);
-        getRestart(true)
+
     }
 
 
@@ -146,10 +146,7 @@ function Timer({ type, userTime, handleSession, getRestart }) {
                         Restart
                     </button>
                 </div>
-                {/* <div id='inputDiv'>
-                    <input type='number' onChange={handleUserTime} max='60'></input>
-                    <button onClick={handleUserTimeButton}>Set Time</button>
-                </div> */}
+
             </div>
 
         </div>
