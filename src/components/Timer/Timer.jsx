@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import './Timer.css'
 
-function Timer({ type, userTime, handleSession }) {
+function Timer({ type, userTime, handleSession, getRestart }) {
 
     const [min, setMin] = useState(userTime)
     const [seconds, setSeconds] = useState(60)
     const [timer, setTimer] = useState(true);
     const [intervalId, setIntervalId] = useState(false);
+    const [restarted, setRestarted] = useState(false);
 
     //initial seconds amount can be lowered to not wait the whole time
     const sec = useRef(6)
@@ -115,6 +116,7 @@ function Timer({ type, userTime, handleSession }) {
         setMin(userTime);
         setIntervalId(false);
         clearInterval(intervalId);
+        getRestart(true)
     }
 
 

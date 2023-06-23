@@ -9,6 +9,7 @@ function App() {
   const [sessionTime, setSessionTime] = useState(1);
   const [breakTime, setBreakTime] = useState(1)
   const [renderedSession, setRenderedSession] = useState(false)
+  const [restarted, setRestarted] = useState(false);
 
   useEffect(() => {
     if (renderedSession === true) {
@@ -16,6 +17,14 @@ function App() {
     }
 
   }, [renderedSession])
+
+  useEffect(() => {
+    if (restarted === true) {
+      restartAll()
+      console.log('restartAll App')
+    }
+
+  }, [restarted])
 
   const handleSession = () => {
 
@@ -66,6 +75,23 @@ function App() {
 
   }
 
+  function getRestart(reset) {
+    if (reset) {
+      setRestarted(!restarted)
+      console.log('restarted getRestart App')
+      console.log(restarted)
+    }
+
+  }
+
+  function restartAll() {
+    if (restarted) {
+      setSessionTime(25)
+      setBreakTime(5)
+      console.log('restart All Function')
+    }
+  }
+
 
   return (
     <>
@@ -73,7 +99,14 @@ function App() {
         <h1>25 x 5 Timer</h1>
 
         <div id='timerBox'>
-          {session ? <Timer type='session' userTime={sessionTime} handleSession={renderSession} /> : <Timer type='break' userTime={breakTime} handleSession={renderSession} />}
+          {session ? <Timer
+            type='session'
+            userTime={sessionTime}
+            handleSession={renderSession} getRestart={getRestart} /> :
+            <Timer
+              type='break'
+              userTime={breakTime}
+              handleSession={renderSession} getRestart={getRestart} />}
 
         </div>
 
