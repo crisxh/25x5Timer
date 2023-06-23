@@ -4,12 +4,24 @@
   flex-direction:column;
 }
 
-#session,#break{
+#userTimes{
+  width:100%;
   display:flex;
-  width:25%;
-  margin:100px;
+  justify-content: space-around;
 }
 
-#setTimers{
+#userTimes>button{
+  border-radius:50%;
+  padding:2%;
+}
+
+#session,#break{
   display:flex;
+
+}
+
+#timerBox{
+  display:flex;
+  justify-content: center;
+ 
 }

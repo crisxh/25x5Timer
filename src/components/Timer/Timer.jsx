@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
 import './Timer.css'
 
-function Timer({ type, userTime }) {
+function Timer({ type, userTime, handleSession }) {
 
     const [min, setMin] = useState(userTime)
     const [seconds, setSeconds] = useState(60)
-    //const [timer, setTimer] = useState(min);
+    const [timer, setTimer] = useState(true);
     const [intervalId, setIntervalId] = useState(false);
 
     //initial seconds amount can be lowered to not wait the whole time
-    const sec = useRef(60)
+    const sec = useRef(6)
 
 
     useEffect(() => {
@@ -42,8 +42,16 @@ function Timer({ type, userTime }) {
 
         }
         if (min === 0 && seconds === 0) {
+
             setIntervalId(false)
             clearInterval(intervalId)
+
+            restartCountDown()
+
+
+
+
+
         }
 
 
@@ -51,13 +59,19 @@ function Timer({ type, userTime }) {
 
 
 
-    }, [seconds, intervalId, min, userTime])
+
+
+    }, [seconds, intervalId, min, userTime, timer])
 
     useEffect(() => {
         restartCountDown()
 
     }, [userTime])
 
+    useEffect(() => {
+        handleSession(min, seconds)
+
+    }, [min, seconds])
 
 
 
@@ -70,30 +84,10 @@ function Timer({ type, userTime }) {
 
         setSeconds(prev => prev - 1);
 
-
-
-
-        // if (seconds > 0) {
-        //     setSeconds(prev => prev - 1);
-        //     console.log('seconds ', seconds)
-        // }
-        // if (seconds === 0) {
-        //     setMin(prev => prev - 1)
-
-
-        // }
-
-
-
-
-
-
-
-
     }
 
     const startStopCountDown = () => {
-        if (!intervalId) {
+        if (!intervalId && min > 0 || seconds >= 0) {
 
 
             setIntervalId(true);
@@ -112,32 +106,10 @@ function Timer({ type, userTime }) {
 
 
 
+
     }
 
-    // const startCountDown = () => {
 
-
-    //     if (!intervalId) {
-
-
-    //         setIntervalId(setInterval(countdown, 1000));
-    //     }
-
-
-    //     console.log(intervalId)
-    // }
-    // const stopCountDown = () => {
-    //     if (intervalId) {
-    //         console.log(intervalId)
-    //         console.log(secondsToMinutes(1430))
-
-    //     }
-
-    //     clearInterval(intervalId);
-    //     setIntervalId(false);
-
-
-    // }
     const restartCountDown = () => {
         setSeconds(sec.current);
         setMin(userTime);
@@ -145,21 +117,11 @@ function Timer({ type, userTime }) {
         clearInterval(intervalId);
     }
 
-    const returnMinSec = () => {
 
-
-
-
-
-
-
-
-
-    }
 
     return (
         <div id={`${type}-timer`} className='timer'>
-            <h1>{type}</h1>
+            <h1 id="timer-label">{type}</h1>
 
 
 
