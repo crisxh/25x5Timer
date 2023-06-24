@@ -10,7 +10,7 @@ function Timer({ type, userTime, handleSession, getRestart }) {
 
 
     //initial seconds amount can be lowered to not wait the whole time
-    const sec = useRef(6)
+    const sec = useRef(60)
 
 
     useEffect(() => {
@@ -88,7 +88,7 @@ function Timer({ type, userTime, handleSession, getRestart }) {
     }
 
     const startStopCountDown = () => {
-        if (!intervalId && min > 0 || seconds >= 0) {
+        if (!intervalId && min > 0 && seconds > 0) {
 
 
             setIntervalId(true);

@@ -9,6 +9,7 @@ function App() {
   const [sessionTime, setSessionTime] = useState(1);
   const [breakTime, setBreakTime] = useState(1)
   const [renderedSession, setRenderedSession] = useState(false)
+  const [reset, setReset] = useState(false);
 
 
   useEffect(() => {
@@ -69,8 +70,14 @@ function App() {
 
   }
 
+  function resetAll() {
+    setSessionTime(25)
+    setBreakTime(5)
+  }
 
+  function getReset() {
 
+  }
 
 
   return (
@@ -82,11 +89,13 @@ function App() {
           {session ? <Timer
             type='session'
             userTime={sessionTime}
-            handleSession={renderSession} /> :
+            handleSession={renderSession}
+            getReset={getReset} /> :
             <Timer
               type='break'
               userTime={breakTime}
-              handleSession={renderSession} />}
+              handleSession={renderSession}
+              getReset={getReset} />}
 
         </div>
 
@@ -111,7 +120,7 @@ function App() {
           </div>
 
         </div>
-        <button id='restart-button' >Reset All</button>
+        <button id='restart-button' onClick={resetAll} >Reset All</button>
 
         <button onClick={handleSession}>Session</button>
 
