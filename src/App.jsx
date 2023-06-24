@@ -31,9 +31,12 @@ function App() {
   function renderSession(minutes, seconds) {
     if (minutes === 0 && seconds === 0) {
       setRenderedSession(true)
+      Alarm.play();
+
 
     } else {
       setRenderedSession(false)
+      Alarm.pause();
     }
 
   }
@@ -79,6 +82,7 @@ function App() {
 
   }
 
+  const Alarm = new Audio("./assets/mixkit-data-scaner-2847.wav")
 
   return (
     <>
