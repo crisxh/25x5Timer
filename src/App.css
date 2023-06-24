@@ -6,21 +6,31 @@
   flex-direction:column;
   background-color:aquamarine;
   align-items: center;
+  align-content: space-around;
 }
 
 #userTimes{
   width:100%;
   display:flex;
-  justify-content: space-around;
+  width:25%;
+  justify-content: space-between;
+  padding:20px;
+  
 }
 
 #userTimes>button{
   border-radius:50%;
   padding:2%;
+
 }
 
 #session,#break{
   display:flex;
+  
+  background-color:palegoldenrod;
+  box-shadow:15px 15px 0 orange;
+  padding:10px;
+  
   
 
 }
@@ -33,3 +43,12 @@
   width:50%;
  
 }
+
+button{
+  color:black;
+  outline:black;
+  background-color: transparent;
+  border-radius:10px;
+  padding:10px;
+}
+
