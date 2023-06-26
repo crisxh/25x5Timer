@@ -51,10 +51,10 @@ function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
         }
         if (min === 0 && seconds === 0) {
 
-            setIntervalId(false)
-            clearInterval(intervalId)
+            setTimeout(setIntervalId(false), 1000)
+            setTimeout(clearInterval(intervalId), 1000)
 
-            restartCountDown()
+            setTimeout(restartCountDown(), 1000)
 
 
 
@@ -78,6 +78,12 @@ function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
 
     useEffect(() => {
         handleSession(min, seconds)
+
+        if (type === 'break') {
+            startStopCountDown()
+
+        }
+
 
     }, [min, seconds])
 

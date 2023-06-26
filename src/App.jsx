@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     if (renderedSession === true) {
-      setTimeout(handleSession(), 3000)
+      handleSession()
     }
 
   }, [renderedSession])
