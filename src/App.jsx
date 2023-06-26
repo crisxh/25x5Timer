@@ -2,15 +2,15 @@ import { useState, useEffect } from 'react'
 
 import './App.css'
 import Timer from './components/Timer/Timer'
-import Alarm from './assets/mixkit-data-scaner-2847.wav'
 
-const alarm = new Audio(Alarm);
+
+
 
 
 function App() {
   const [session, setSession] = useState(true)
-  const [sessionTime, setSessionTime] = useState(25);
-  const [breakTime, setBreakTime] = useState(5)
+  const [sessionTime, setSessionTime] = useState(1);
+  const [breakTime, setBreakTime] = useState(1)
   const [renderedSession, setRenderedSession] = useState(false)
   const [reset, setReset] = useState(false);
   const [parentInterval, setParentInterval] = useState(false)
@@ -19,16 +19,20 @@ function App() {
   useEffect(() => {
     if (renderedSession === true) {
       handleSession()
+
+
     }
 
   }, [renderedSession])
 
 
 
-  const handleSession = () => {
+  const handleSession = (startStopSession) => {
 
 
-    setSession(!session)
+    setTimeout(setSession(!session), 3000)
+    setParentInterval(true)
+
     console.log(session)
   }
 
@@ -36,12 +40,14 @@ function App() {
     if (minutes === 0 && seconds === 0) {
       setRenderedSession(true)
       setParentInterval(true)
-      alarm.play();
+
+
+
 
 
     } else {
       setRenderedSession(false)
-      alarm.pause()
+
 
     }
 

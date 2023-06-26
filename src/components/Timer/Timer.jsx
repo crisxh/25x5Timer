@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import './Timer.css'
+import beep from "/src/assets/mixkit-data-scaner-2847.wav"
+const alarm = new Audio(beep)
+
+
+
 
 function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
 
@@ -51,10 +56,12 @@ function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
         }
         if (min === 0 && seconds === 0) {
 
-            setTimeout(setIntervalId(false), 1000)
-            setTimeout(clearInterval(intervalId), 1000)
-
-            setTimeout(restartCountDown(), 1000)
+            setIntervalId(true)
+            //clearInterval(intervalId)
+            setMin(0)
+            setSeconds(0)
+            restartCountDown()
+            alarm.play()
 
 
 
@@ -77,12 +84,8 @@ function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
     }, [userTime])
 
     useEffect(() => {
-        handleSession(min, seconds)
+        handleSession(min, seconds, startStopCountDown)
 
-        if (type === 'break') {
-            startStopCountDown()
-
-        }
 
 
     }, [min, seconds])
@@ -135,12 +138,14 @@ function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
 
 
 
+
+
     return (
         <div id={`${type}-timer`} className='timer'>
             <h1 id="timer-label">{type}</h1>
             <div id='time-left'>
 
-                {min <= 9 ? "0" + min : min}:{seconds === 60 ? '00' : seconds <= 9 ? "0" + seconds : seconds}
+                {min <= 9 ? "0" + min : min === 0 && seconds === 0 ? 0 : min}:{seconds === 60 ? '00' : seconds <= 9 ? "0" + seconds : min === 0 && seconds === 0 ? "00" : seconds}
 
 
 
