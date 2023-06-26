@@ -9,8 +9,8 @@ import Timer from './components/Timer/Timer'
 
 function App() {
   const [session, setSession] = useState(true)
-  const [sessionTime, setSessionTime] = useState(25);
-  const [breakTime, setBreakTime] = useState(5)
+  const [sessionTime, setSessionTime] = useState(1);
+  const [breakTime, setBreakTime] = useState(1)
   const [renderedSession, setRenderedSession] = useState(false)
   const [reset, setReset] = useState(false);
   const [parentInterval, setParentInterval] = useState(false)
@@ -102,7 +102,7 @@ function App() {
       <div id="app">
         <h1>25 x 5 Timer</h1>
 
-        <div id='timerBox'>
+        <div id='timerBox' className={session === true ? 'session-timer' : 'break-timer'}>
           {session ? <Timer
             type='session'
             userTime={sessionTime}
