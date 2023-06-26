@@ -9,8 +9,8 @@ import Timer from './components/Timer/Timer'
 
 function App() {
   const [session, setSession] = useState(true)
-  const [sessionTime, setSessionTime] = useState(1);
-  const [breakTime, setBreakTime] = useState(1)
+  const [sessionTime, setSessionTime] = useState(25);
+  const [breakTime, setBreakTime] = useState(5)
   const [renderedSession, setRenderedSession] = useState(false)
   const [reset, setReset] = useState(false);
   const [parentInterval, setParentInterval] = useState(false)
