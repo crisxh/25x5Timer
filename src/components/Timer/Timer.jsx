@@ -108,7 +108,7 @@ function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
 
 
             setIntervalId(true);
-            setIntervalId(setInterval(countdown, 100))
+            setIntervalId(setInterval(countdown, 1000))
         }
 
 
