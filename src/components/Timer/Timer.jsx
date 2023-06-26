@@ -1,17 +1,24 @@
 import { useState, useEffect, useRef } from 'react'
 import './Timer.css'
 
-function Timer({ type, userTime, handleSession, getRestart }) {
+function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
 
     const [min, setMin] = useState(userTime)
     const [seconds, setSeconds] = useState(60)
     const [timer, setTimer] = useState(true);
     const [intervalId, setIntervalId] = useState(false);
+    const [checkParentInterval, setCheckParentInterval] = useState(parentInterval)
 
 
     //initial seconds amount can be lowered to not wait the whole time
     const sec = useRef(60)
 
+
+    useEffect(() => {
+        if (checkParentInterval) {
+            startStopCountDown()
+        }
+    }, [checkParentInterval, parentInterval])
 
     useEffect(() => {
 
@@ -92,8 +99,9 @@ function Timer({ type, userTime, handleSession, getRestart }) {
 
 
             setIntervalId(true);
-            setIntervalId(setInterval(countdown, 1000))
+            setIntervalId(setInterval(countdown, 100))
         }
+
 
 
 
@@ -124,19 +132,19 @@ function Timer({ type, userTime, handleSession, getRestart }) {
     return (
         <div id={`${type}-timer`} className='timer'>
             <h1 id="timer-label">{type}</h1>
+            <div id='time-left'>
 
+                {min <= 9 ? "0" + min : min}:{seconds === 60 ? '00' : seconds <= 9 ? "0" + seconds : seconds}
+
+
+
+            </div>
 
 
 
             <div id='Countdown' >
 
-                <div id='time-left'>
 
-                    {min <= 9 ? "0" + min : min}:{seconds === 60 ? '00' : seconds <= 9 ? "0" + seconds : seconds}
-
-
-
-                </div>
                 <div id='buttons'>
                     <button className='timerButton' id="start_stop" onClick={startStopCountDown}>
                         Start

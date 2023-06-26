@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 
 import './App.css'
 import Timer from './components/Timer/Timer'
+import Alarm from './assets/mixkit-data-scaner-2847.wav'
+
+const alarm = new Audio(Alarm);
 
 
 function App() {
@@ -10,11 +13,12 @@ function App() {
   const [breakTime, setBreakTime] = useState(5)
   const [renderedSession, setRenderedSession] = useState(false)
   const [reset, setReset] = useState(false);
+  const [parentInterval, setParentInterval] = useState(false)
 
 
   useEffect(() => {
     if (renderedSession === true) {
-      handleSession()
+      setTimeout(handleSession(), 3000)
     }
 
   }, [renderedSession])
@@ -31,12 +35,14 @@ function App() {
   function renderSession(minutes, seconds) {
     if (minutes === 0 && seconds === 0) {
       setRenderedSession(true)
-      Alarm.play();
+      setParentInterval(true)
+      alarm.play();
 
 
     } else {
       setRenderedSession(false)
-      Alarm.pause();
+      alarm.pause()
+
     }
 
   }
@@ -61,13 +67,14 @@ function App() {
 
   function handleDecrement(e) {
     console.log(e.target.id)
-    if (e.target.id === 'session-decrement' && sessionTime > 0) {
+    if (e.target.id === 'session-decrement' && sessionTime > 1) {
       setSessionTime(prev => prev - 1)
-    } else if (e.target.id === 'break-decrement' && breakTime > 0) {
+    } else if (e.target.id === 'break-decrement' && breakTime > 1) {
       setBreakTime(prev => prev - 1)
+
     }
 
-    console.log(sessionTime)
+    console.log(breakTime)
 
 
 
@@ -82,7 +89,7 @@ function App() {
 
   }
 
-  const Alarm = new Audio("./assets/mixkit-data-scaner-2847.wav")
+
 
   return (
     <>
@@ -94,12 +101,14 @@ function App() {
             type='session'
             userTime={sessionTime}
             handleSession={renderSession}
-            getReset={getReset} /> :
+            getReset={getReset}
+            parentInterval={parentInterval} /> :
             <Timer
               type='break'
               userTime={breakTime}
               handleSession={renderSession}
-              getReset={getReset} />}
+              getReset={getReset}
+              parentInterval={parentInterval} />}
 
         </div>
 
@@ -124,9 +133,10 @@ function App() {
           </div>
 
         </div>
-        <button id='restart-button' onClick={resetAll} >Reset All</button>
-
-        <button onClick={handleSession}>Session</button>
+        <div id="buttons">
+          <button id='restart-button' onClick={resetAll} >Reset All</button>
+          <button onClick={handleSession}>Session</button>
+        </div>
 
 
 
