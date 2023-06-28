@@ -67,8 +67,9 @@ function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
 
 
 
+        } if (type === 'break' && min === 0 && seconds === 0) {
+            startStopCountDown()
         }
-
 
 
 
@@ -108,7 +109,7 @@ function Timer({ type, userTime, handleSession, getRestart, parentInterval }) {
 
 
             setIntervalId(true);
-            setIntervalId(setInterval(countdown, 1000))
+            setIntervalId(setInterval(countdown, 100))
         }
 
 
