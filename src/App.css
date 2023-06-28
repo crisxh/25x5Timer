@@ -19,6 +19,7 @@ h1{
   margin:0px;
   display:flex;
   flex-direction:column;
+  background-image:url('./assets/3860709.jpg');
   background-color:aquamarine;
   align-items: center;
   align-content: space-around;

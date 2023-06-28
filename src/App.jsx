@@ -141,7 +141,7 @@ function App() {
         </div>
         <div id="buttons">
           <button id='restart-button' onClick={resetAll} >Reset All</button>
-          <button onClick={handleSession}>Session</button>
+          <button onClick={handleSession}>Session/Break</button>
         </div>
 
 
